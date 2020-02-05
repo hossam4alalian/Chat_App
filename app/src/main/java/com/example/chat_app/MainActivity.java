@@ -13,12 +13,8 @@ import android.widget.TextView;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-
     EditText text;
-
     TextView recieved;
-
-
     LinearLayout lin;
     String str;
 
@@ -26,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -38,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(){
             public void run(){
                 try {
-
-
                     while(true) {
-
                         str= login.client.getDi().readUTF();
                         String text=str.substring(0,6);
 
@@ -51,29 +42,18 @@ public class MainActivity extends AppCompatActivity {
                                 lin.refreshDrawableState();
                                 recieved=new TextView(MainActivity.this);
 
-
                                 recieved.setText(str.substring(6));
 
-
                                 lin.post(new Runnable() {
-
                                     public void run() {
                                         lin.addView(recieved);
                                     }
                                 });
-
-
-
                             }
-
                         } catch (Exception e) {
                             Log.wtf("a","whattttttt");
                         }
-
                     }
-
-
-
                 } catch (Exception e){
 
                 }
@@ -87,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
         lin = (LinearLayout) findViewById(R.id.chatBox);
         lin.removeAllViews();
 
-
-
         Button send=(Button) findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,12 +78,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void send(){
-
         try {
-
             text = (EditText) findViewById(R.id.text);
 
-            if(!text.getText().equals("")){
+            if(!text.getText().toString().equals("")){
                 Bundle extras = getIntent().getExtras();
 
                 String theName = extras.getString("name");
@@ -117,17 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 login.client.getDs().writeUTF(text.getText().toString());
                 text.setText("");
             }
-
-
         } catch (IOException e){
-
         }
-
     }
-
-
-
-
-
-
 }
