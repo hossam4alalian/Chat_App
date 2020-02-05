@@ -56,6 +56,27 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        final Intent intent1 = new Intent(this, AllUsers.class);
+
+        Button showUsers=(Button) findViewById(R.id.showUsers);
+        showUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    client = new Client();
+                    client.getDs().writeUTF(name.getText().toString());
+                    theName=name.getText().toString();
+                    Log.wtf("a",theName);
+
+                } catch (IOException e){
+
+                }
+                //intent.putExtra("name", theName);
+                startActivity(intent1);
+            }
+        });
+
     }
 
 
